@@ -1,3 +1,6 @@
+using Contact_App.Models;
+using Contact = Contact_App.Models.Contact;
+
 namespace Contact_App.Views;
 
 public partial class ContactPage : ContentPage
@@ -6,25 +9,21 @@ public partial class ContactPage : ContentPage
     {
         InitializeComponent();
 
-        List<Contact> ContactList = new List<Contact>() 
-        {
-            new Contact {Name = "Frog", Email = "man@gmail.com"},
-            new Contact {Name = "Lion", Email = "man@gmail.com"},
-            new Contact {Name = "Egg", Email = "man@gmail.com"},
-            new Contact {Name = "Pork", Email = "man@gmail.com"}
-        };
+        List<Contact> ContactList = ContactRepository.GetAllContacts();
 
         ListContacts.ItemsSource = ContactList;
     }
 
-    public class Contact
+    private async void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        public required String Name {get; set;}
-        public required String Email { get; set; }
+        if (ListContacts.SelectedItem != null)
+        {
+            await Shell.Current.GoToAsync($"{nameof(EditContact)}?Id={((Contact)ListContacts.SelectedItem).ContactId}");
+        }
     }
 
-    private void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void ListContacts_ItemTapped(object sender, ItemTappedEventArgs e)
     {
-        DisplayAlert("Test", $"{ListContacts.SelectedItem}", "Done");
+        ListContacts.SelectedItem = null;
     }
 }
