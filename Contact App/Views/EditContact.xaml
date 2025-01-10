@@ -3,11 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Contact_App.Views.EditContact"
              Title="Edit Contact">
-    <VerticalStackLayout>
-        <Label 
-            x:Name="lbll"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Margin="20,20,20,0" Spacing="10">
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Name" VerticalOptions="Center"></Label>
+                <Entry x:Name="entryName" Placeholder="Enter Contact Name" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Email" VerticalOptions="Center"></Label>
+                <Entry x:Name="entryEmail" Placeholder="Enter Email address" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Phone" VerticalOptions="Center"></Label>
+                <Entry x:Name="entryPhone" Placeholder="Enter Phone number" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Address" VerticalOptions="Center"></Label>
+                <Entry x:Name="entryAddress" Placeholder="Enter Address (Optional)" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+        <Button x:Name="btnSave" Clicked="btnSave_Clicked" Text="Save" ></Button>
+        <Button x:Name="btnCancel" Clicked="btnCancel_Clicked" Text="Cancel"></Button>
     </VerticalStackLayout>
 </ContentPage>

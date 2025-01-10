@@ -1,4 +1,5 @@
 using Contact_App.Models;
+using System.Collections.ObjectModel;
 using Contact = Contact_App.Models.Contact;
 
 namespace Contact_App.Views;
@@ -8,9 +9,13 @@ public partial class ContactPage : ContentPage
     public ContactPage()
     {
         InitializeComponent();
+    }
 
-        List<Contact> ContactList = ContactRepository.GetAllContacts();
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
 
+        var ContactList = new ObservableCollection<Contact>(ContactRepository.GetAllContacts());
         ListContacts.ItemsSource = ContactList;
     }
 
