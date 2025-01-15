@@ -22,10 +22,10 @@ public partial class EditContact : ContentPage
 
             if (contact != null)
             {
-                entryName.Text = contact.Name;
-                entryEmail.Text = contact.Email;
-                entryPhone.Text = contact.Phone;
-                entryAddress.Text = contact.Address;
+                contactCtrl.Name = contact.Name;
+                contactCtrl.Email = contact.Email;
+                contactCtrl.Phone = contact.Phone;
+                contactCtrl.Address = contact.Address;
             }
         }
     }
@@ -33,10 +33,11 @@ public partial class EditContact : ContentPage
 
     private void btnSave_Clicked(object sender, EventArgs e)
     {
-        contact.Name = entryName.Text;
-        contact.Email = entryEmail.Text;
-        contact.Phone = entryPhone.Text;
-        contact.Address = entryAddress.Text;
+
+        contact.Name = contactCtrl.Name;
+        contact.Email = contactCtrl.Email;
+        contact.Phone = contactCtrl.Phone;
+        contact.Address = contactCtrl.Address;
 
         ContactRepository.UpdateContact(contact.ContactId, contact);
         Shell.Current.GoToAsync("..");
@@ -44,6 +45,11 @@ public partial class EditContact : ContentPage
     private void btnCancel_Clicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("..");
+    }
+
+    private void ContactControl_OnError(object sender, String e)
+    {
+        DisplayAlert("Error", e, "close");
     }
 
 }

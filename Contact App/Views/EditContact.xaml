@@ -1,38 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:Contact_App.Views.Controls"
              x:Class="Contact_App.Views.EditContact"
              Title="Edit Contact">
-    <VerticalStackLayout Margin="20,20,20,0" Spacing="10">
-
-        <Frame Padding="10, 2, 10, 2">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Name" VerticalOptions="Center"></Label>
-                <Entry x:Name="entryName" Placeholder="Enter Contact Name" VerticalOptions="Center"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-
-        <Frame Padding="10, 2, 10, 2">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Email" VerticalOptions="Center"></Label>
-                <Entry x:Name="entryEmail" Placeholder="Enter Email address" VerticalOptions="Center"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-
-        <Frame Padding="10, 2, 10, 2">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Phone" VerticalOptions="Center"></Label>
-                <Entry x:Name="entryPhone" Placeholder="Enter Phone number" VerticalOptions="Center"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-
-        <Frame Padding="10, 2, 10, 2">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="Address" VerticalOptions="Center"></Label>
-                <Entry x:Name="entryAddress" Placeholder="Enter Address (Optional)" VerticalOptions="Center"></Entry>
-            </HorizontalStackLayout>
-        </Frame>
-        <Button x:Name="btnSave" Clicked="btnSave_Clicked" Text="Save" ></Button>
-        <Button x:Name="btnCancel" Clicked="btnCancel_Clicked" Text="Cancel"></Button>
-    </VerticalStackLayout>
+    <controls:ContactControl 
+        x:Name="contactCtrl"
+        OnSave="btnSave_Clicked"
+        OnCancel="btnCancel_Clicked"
+        OnError="ContactControl_OnError"
+        />
 </ContentPage>

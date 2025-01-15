@@ -4,17 +4,30 @@
              x:Class="Contact_App.Views.ContactPage"
              Title="Contact Page">
 
-    <ListView x:Name="ListContacts" 
+    <Grid RowDefinitions="*, 50"
+          ColumnDefinitions="*">
+        <ListView 
+              Grid.Row="0"
+              Grid.Column="0"
+              x:Name="ListContacts" 
               BackgroundColor="White" 
               RowHeight="65" 
               SeparatorColor="gray"
               ItemSelected="ListContacts_ItemSelected"
               ItemTapped="ListContacts_ItemTapped"
               >
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            x:Name="btnAddContact" 
+            Text="Add Contact" 
+            Clicked="btnAddContact_Clicked">
+        </Button>
+    </Grid>
 </ContentPage>
