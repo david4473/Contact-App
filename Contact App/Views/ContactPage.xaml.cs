@@ -1,5 +1,6 @@
 using Contact_App.Models;
 using System.Collections.ObjectModel;
+
 using Contact = Contact_App.Models.Contact;
 
 namespace Contact_App.Views;
@@ -15,8 +16,7 @@ public partial class ContactPage : ContentPage
     {
         base.OnAppearing();
 
-        var ContactList = new ObservableCollection<Contact>(ContactRepository.GetAllContacts());
-        ListContacts.ItemsSource = ContactList;
+        contactUpdate();
     }
 
     private async void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -35,5 +35,26 @@ public partial class ContactPage : ContentPage
     private void btnAddContact_Clicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync(nameof(AddContact));
+    }
+
+    private void Delete_Clicked(object sender, EventArgs e)
+    {
+        var menuItem = sender as MenuItem;
+        var contact = menuItem.CommandParameter as Contact;
+        ContactRepository.DeleteContact(contact.ContactId);
+
+        contactUpdate();
+    }
+
+    private void contactUpdate()
+    {
+        var ContactList = new ObservableCollection<Contact>(ContactRepository.GetAllContacts());
+        ListContacts.ItemsSource = ContactList;
+    }
+
+    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var contacts = new ObservableCollection<Contact>(ContactRepository.SearchContact(((SearchBar)sender).Text));
+        ListContacts.ItemsSource = contacts;
     }
 }

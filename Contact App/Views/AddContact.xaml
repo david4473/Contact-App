@@ -5,6 +5,7 @@
              x:Class="Contact_App.Views.AddContact"
              Title="Add Contact">
     <controls:ContactControl 
+        x:Name="ContactControl"
         OnSave="ContactControl_OnSave"
         OnCancel="ContactControl_OnCancel"
         OnError="ContactControl_OnError"/>

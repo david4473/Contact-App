@@ -8,7 +8,7 @@ namespace Contact_App.Models
 {
     public class Contact
     {
-        public required int ContactId { get; set; }
+        public int ContactId { get; set; }
         public required String Name { get; set; }
         public required String Email { get; set; }
         public required String Phone { get; set; }

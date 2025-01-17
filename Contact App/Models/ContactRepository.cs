@@ -54,7 +54,42 @@ namespace Contact_App.Models
                 ContactToUpdate.Email = contact.Email;
                 ContactToUpdate.Name = contact.Name;
             }
+        }
 
+        public static void AddContact(Contact contact)
+        {
+            var MaxId = _contacts.Max(x => x.ContactId);
+            contact.ContactId = MaxId + 1;
+            _contacts.Add(contact);
+        }
+
+        public static void DeleteContact(int contactId)
+        {
+            var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+            if (contact != null)
+            {
+                _contacts.Remove(contact);
+            }
+        }
+
+        public static List<Contact> SearchContact(String filterText)
+        {
+            var contacts = _contacts.Where(x => !String.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
+
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !String.IsNullOrWhiteSpace(x.Email) && x.Email.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !String.IsNullOrWhiteSpace(x.Phone) &&  x.Phone.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+            if (contacts == null || contacts.Count <= 0)
+                contacts = _contacts.Where(x => !String.IsNullOrWhiteSpace(x.Address) && x.Address.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))?.ToList();
+            else
+                return contacts;
+
+            return contacts;
         }
     }
 }

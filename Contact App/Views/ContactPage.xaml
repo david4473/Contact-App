@@ -4,8 +4,16 @@
              x:Class="Contact_App.Views.ContactPage"
              Title="Contact Page">
 
-    <Grid RowDefinitions="*, 50"
+    <Grid Padding="5"
+          RowDefinitions="50, *, 50"
           ColumnDefinitions="*">
+        <SearchBar 
+            Grid.Row="0" 
+            Grid.Column="0"  
+            Placeholder="Search Contact"
+            TextChanged="SearchBar_TextChanged">
+            
+        </SearchBar>
         <ListView 
               Grid.Row="0"
               Grid.Column="0"
@@ -18,12 +26,23 @@
               >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Email}"></TextCell>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Email}">
+                        <TextCell.ContextActions>
+                            <MenuItem 
+                                Text="Delete"
+                                IsDestructive="True"
+                                CommandParameter="{Binding .}"
+                                Clicked="Delete_Clicked"
+                            >
+                                
+                            </MenuItem>
+                        </TextCell.ContextActions>
+                    </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <Button 
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.Column="0" 
             x:Name="btnAddContact" 
             Text="Add Contact" 

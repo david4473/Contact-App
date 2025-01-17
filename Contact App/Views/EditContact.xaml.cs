@@ -33,7 +33,6 @@ public partial class EditContact : ContentPage
 
     private void btnSave_Clicked(object sender, EventArgs e)
     {
-
         contact.Name = contactCtrl.Name;
         contact.Email = contactCtrl.Email;
         contact.Phone = contactCtrl.Phone;
